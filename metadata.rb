@@ -1,0 +1,7 @@
+name 'oracle-env'
+maintainer 'Shinya Yanagihara'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures oracle-env'
+long_description 'Installs/Configures oracle-env'
+version '0.1.0'
