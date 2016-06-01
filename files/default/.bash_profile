@@ -9,7 +9,7 @@ fi
 
 # Oracle Base Directory
 export ORACLE_BASE=/u01/app/oracle
-umasj 022
+umask 022
 
 # Oracle Database
 export ORACLE_HOME=/u01/app/oracle/product/12.1.0/dbhome_1
