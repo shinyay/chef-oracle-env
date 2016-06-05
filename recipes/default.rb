@@ -30,7 +30,7 @@ user "oracle" do
   gid "oinstall"
   supports :manage_home => true
   home "/home/oracle"
-  password "$1$YnHMPdkH$/KqjmWACS3iTb/.sfxMg30"
+  password "ハッシュ化したパスワード"
 end
 
 groups.each_key do |name|
