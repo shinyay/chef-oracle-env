@@ -4,6 +4,10 @@
 #
 # Copyright (c) 2016 Shinya Yanagihara, All Rights Reserved.
 
+[:platform, :platform_version, :ipaddress, :fqdn, :hostname].each do |key|
+  puts "node['#{key}'] = #{node[key]}"
+end
+
 #############################
 ## Create OS groups
 
