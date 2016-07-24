@@ -20,7 +20,7 @@ export LANG=en_US.UTF-8
 #export NLS_LANG=Japanese_Japan.AL32UTF8
 
 # Fusiom Middleware
-export ORACLE_HOME=$ORACLE_BASE/product/fmw12.2.1
+export ORACLE_HOME=$ORACLE_BASE/product/fmw12.2.1.1
 export MW_HOME=$ORACLE_HOME
 export WLS_HOME=$MW_HOME/wlserver
 export WL_HOME=$WLS_HOME
