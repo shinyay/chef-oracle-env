@@ -11,13 +11,13 @@ puts "####{cookbook_name}::#{recipe_name} #{Time.now.inspect}: Starting compile 
 execute "make swapfile" do
   user 'root'
   group 'root'
-  command "dd if=/dev/zero of=#{node['env']['swap']['swapfile']} bs=#{node['env']['swap']['blocksize']} count=#{node['env']['swap']['count']} && chmod 600 #{node['env']['swap']['swapfile']} && mkswap #{node['env']['swap']['swapfile']}"
+  command "dd if=/dev/zero of=#{node[:env][:swap][:swapfile]} bs=#{node[:env][:swap][:blocksize]} count=#{node[:env][:swap][:count]} && chmod 600 #{node[:env][:swap][:swapfile]} && mkswap #{node[:env][:swap][:swapfile]}"
 end
 
 mount '/dev/null' do
   action :enable
-  device "#{node['env']['swap']['swapfile']}"
-  fstype 'swap'
+  device "#{node[:env][:swap][:swapfile]}"
+  fstype :swap
 end
 
 execute "activate swap" do
