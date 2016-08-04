@@ -1,0 +1,32 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+# Oracle Base Directory
+export ORACLE_BASE=/u01/app/oracle
+umask 022
+
+<% if node[:env][:bash][:product]=="DB" -%>
+# Oracle Database
+export ORACLE_HOME=/u01/app/oracle/product/<%= node[:env][:bash][:product_version] %>/dbhome_1
+export ORACLE_SID=orcl
+export PATH=$ORACLE_HOME/bin:$PATH
+#export LANG=ja_JP.UTF-8
+export LANG=en_US.UTF-8
+#export NLS_LANG=Japanese_Japan.AL32UTF8
+<% end -%>
+
+<% if node[:env][:bash][:product]=="FMW" -%>
+# Fusion Middleware
+export ORACLE_HOME=$ORACLE_BASE/product/<%= node[:env][:bash][:product_version] %>
+export MW_HOME=$ORACLE_HOME
+export WLS_HOME=$MW_HOME/wlserver
+export WL_HOME=$WLS_HOME
+export DOMAIN_BASE=$ORACLE_BASE/config/domains
+export DOMAIN_HOME=$DOMAIN_BASE/<%= node[:env][:bash][:product_version] %>/<%= node[:env][:bash][:domain_name] %>
+<% end -%>
