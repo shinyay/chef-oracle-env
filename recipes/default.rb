@@ -82,25 +82,37 @@ end
 #############################
 ## Create Installation directories
 
-dirs = [
+oracle_dirs = [
   "/u01",
   "/u01/app",
   "/u01/app/oracle",
   "/u01/app/oracle/product",
   "/u01/app/oracle/product/12.1.0",
   "/u01/app/oracle/product/12.1.0/dbhome_1",
-  "/u01/app/oracle/product/12.1.0/grid",
   "/u01/app/oracle/config",
   "/u01/app/oracle/config/domains",
   "/u01/app/oracle/config/applications",
-  "/u01/app/grid",
   "/u01/app/oraInventory"
 ]
 
-dirs.each do |dir|
+grid_dirs = [
+  "/u01/app/oracle/product/12.1.0/grid",
+  "/u01/app/grid"
+]
+
+oracle_dirs.each do |dir|
   directory dir do
-    mode 00755
+    mode 00775
     owner "oracle"
     group "oinstall"
   end
 end
+
+grid_dirs.each do |dir|
+  directory dir do
+    mode 00775
+    owner "grid"
+    group "oinstall"
+  end
+end
+
