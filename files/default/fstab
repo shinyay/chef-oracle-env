@@ -10,4 +10,4 @@
 /dev/sda1               /boot                   xfs     defaults        0 0
 /dev/mapper/ol-home     /home                   xfs     defaults        0 0
 /dev/mapper/ol-swap     swap                    swap    defaults        0 0
-tmpfs                   /dev/shm                tmpfs   defaults,size=1.5G 0 0
+tmpfs                   /dev/shm                tmpfs   defaults,size=1536M 0 0
