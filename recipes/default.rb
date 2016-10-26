@@ -18,12 +18,9 @@ oracle_groups = {
   "oper" => "54324",
   "dgdba" => "54325",
   "kmdba" => "54326",
-  "asmadmin" => "54327",
-  "asmdba" => "54328",
-  "asmoper" => "54329"
 }
 
-grid_groups = {
+asm_groups = {
   "asmadmin" => "54327",
   "asmdba" => "54328",
   "asmoper" => "54329"
@@ -35,7 +32,7 @@ oracle_groups.each do |name, gid|
   end
 end
 
-grid_groups.each do |name, gid|
+asm_groups.each do |name, gid|
   group name do
     gid gid
   end
@@ -47,7 +44,7 @@ end
 user "oracle" do
   uid 1200
   gid "oinstall"
-  supports :manage_home => true
+  manage_home true
   home "/home/oracle"
   password "$1$YnHMPdkH$/KqjmWACS3iTb/.sfxMg30"
 end
@@ -63,20 +60,30 @@ group "asmadmin" do
   action :modify
   append true
 end 
+group "asmdba" do
+  members "oracle"
+  action :modify
+  append true
+end
 
 user "grid" do
   uid 1100
   gid "oinstall"
-  supports :manage_home => true
+  manage_home true
   home "/home/grid"
   password "$1$YnHMPdkH$/KqjmWACS3iTb/.sfxMg30"
 end
 
-grid_groups.each_key do |name|
+asm_groups.each_key do |name|
   group name do
     members "grid"
     action :modify
   end
+end
+group "dba" do
+  members "grid"
+  action :modify
+  append true
 end
 
 #############################
@@ -87,8 +94,8 @@ oracle_dirs = [
   "/u01/app",
   "/u01/app/oracle",
   "/u01/app/oracle/product",
-  "/u01/app/oracle/product/12.1.0",
-  "/u01/app/oracle/product/12.1.0/dbhome_1",
+  "/u01/app/oracle/product/12.1.0,2",
+  "/u01/app/oracle/product/12.1.0.2/dbhome_1",
   "/u01/app/oracle/config",
   "/u01/app/oracle/config/domains",
   "/u01/app/oracle/config/applications",
@@ -96,7 +103,7 @@ oracle_dirs = [
 ]
 
 grid_dirs = [
-  "/u01/app/oracle/product/12.1.0/grid",
+  "/u01/app/oracle/product/12.1.0.2/grid",
   "/u01/app/grid"
 ]
 
