@@ -78,7 +78,7 @@ oracle_dirs = [
   "/u01/app",
   "/u01/app/oracle",
   "/u01/app/oracle/product",
-  "/u01/app/oracle/product/12.1.0,2",
+  "/u01/app/oracle/product/12.1.0.2",
   "/u01/app/oracle/product/12.1.0.2/dbhome_1",
   "/u01/app/oracle/config",
   "/u01/app/oracle/config/domains",
