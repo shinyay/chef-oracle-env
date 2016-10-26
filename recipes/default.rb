@@ -9,9 +9,9 @@
 end
 
 #############################
-## Create OS groups
+## Create OS user
 
-oracle_groups = { 
+oracle_groups = {
   "oinstall" => "54321",
   "dba" => "54322",
   "backupdba" => "54323",
@@ -26,59 +26,43 @@ asm_groups = {
   "asmoper" => "54329"
 }
 
-oracle_groups.each do |name, gid|
-  group name do
-    gid gid
-  end
-end
-
-asm_groups.each do |name, gid|
-  group name do
-    gid gid
-  end
-end
-
-#############################
-## Create OS user
-
 user "oracle" do
   uid 1200
-  gid "oinstall"
   manage_home true
   home "/home/oracle"
   password "$1$YnHMPdkH$/KqjmWACS3iTb/.sfxMg30"
 end
 
-oracle_groups.each_key do |name|
+oracle_groups.each do |name, gid|
   group name do
     members "oracle"
-    action :modify
+    gid gid
   end
-end
-group "asmadmin" do
-  members "oracle"
-  action :modify
-  append true
-end 
-group "asmdba" do
-  members "oracle"
-  action :modify
-  append true
 end
 
 user "grid" do
   uid 1100
-  gid "oinstall"
   manage_home true
   home "/home/grid"
   password "$1$YnHMPdkH$/KqjmWACS3iTb/.sfxMg30"
 end
 
-asm_groups.each_key do |name|
+asm_groups.each do |name, gid|
   group name do
     members "grid"
-    action :modify
+    gid gid
   end
+end
+
+group "asmadmin" do
+  members "oracle"
+  action :modify
+  append true
+end
+group "asmdba" do
+  members "oracle"
+  action :modify
+  append true
 end
 group "dba" do
   members "grid"
